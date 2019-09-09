@@ -10,7 +10,7 @@ void Show(Node *&Tree)
 	if (Tree != NULL)
 	{
 		Show(Tree->l);
-		cout << Tree->x;
+		cout << endl << Tree->x;
 		Show(Tree->r);
 	}
 }
@@ -19,26 +19,31 @@ void add(int x, Node *&Tree)
 	if (NULL == Tree)
 	{
 		Tree = new Node;
+		Tree->x = x;
+		cout << endl << x;
+		Tree->l = Tree->r = NULL;
 
 	}
 	if (x < Tree->x)
 	{
-		if (Tree->l != NULL) add(x, Tree->l); //При помощи рекурсии заталкиваем элемент на свободный участок
-		else                                          //Если элемент получил свой участок, то
+		if (Tree->l != NULL) add(x, Tree->l);
+		else                                          
 		{
-			Tree->l = new Node;                      //Выделяем память левому подзвену. Именно подзвену, а не просто звену
-			Tree->l->l = Tree->l->r = NULL;        //У левого подзвена будут свои левое и правое подзвенья, инициализируем их пустотой
-			Tree->l->x = x;                          //Записываем в левое подзвено записываемый элемент
+			Tree->l = new Node;                      
+			Tree->l->l = Tree->l->r = NULL;        
+			Tree->l->x = x; 
+			cout << endl << x << "          ";
 		}
 	}
 	if (x > Tree->x)
 	{
-		if (Tree->r != NULL) add(x, Tree->r); //При помощи рекурсии заталкиваем элемент на свободный участок
-		else                                          //Если элемент получил свой участок, то
+		if (Tree->r != NULL) add(x, Tree->r); 
+		else                                          
 		{
-			Tree->r = new Node;                      //Выделяем память левому подзвену. Именно подзвену, а не просто звену
-			Tree->r->l= Tree->r->r = NULL;        //У левого подзвена будут свои левое и правое подзвенья, инициализируем их пустотой
-			Tree->r->x = x;                          //Записываем в левое подзвено записываемый элемент
+			Tree->r = new Node;                      
+			Tree->r->l= Tree->r->r = NULL;        
+			Tree->r->x = x;  
+			cout << endl << "         "  << x;
 		}
 	}
 }
@@ -53,9 +58,17 @@ void del(Node *&Tree)
 }
 int main()
 {
-	int x = 0;
-	int A[20] = { 15,17,24,31,83,23,57,99,77,66,0,37,94,23,74,1,85,2};
+	Node *Tree = NULL;
+	int A[18] = { 15,17,24,31,83,23,57,99,77,66,0,37,94,23,74,1,85,2};
 
+	for (int i = 0; i <= 18; i++)
+	{
+		add(A[i], Tree);
 
+	}
+	
+	del(Tree);
+
+	system("pause");
 	return 0;
 }
